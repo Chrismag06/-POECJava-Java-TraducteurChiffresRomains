@@ -14,84 +14,118 @@ public class TraducteurChiffresRomains {
 		Scanner myObj = new Scanner(System.in);
 		String nombre = "";
 		String chiffreRomain = "";
-		int intNombre = 0;
-		int cpt = 0;
+		int borneMax = 0;
 
 		String[][] correspondance = {{"I","V","X","L","C","D","M"}, {"1","5", "10","50","100","500","1000"}};
 
 		for (int j= 0; j < correspondance[0].length; ++j) {
 			System.out.println( correspondance[0][j] + " = " + correspondance[1][j]);
 		}
-		
+
 		System.out.println("Entrez un nombre");
 		nombre = myObj.nextLine();
-		
-		intNombre = Integer.valueOf(nombre);
-		
-//		switch (intNombre){
-//		case 
-//		
-//		}
-//		
-		
-//		while(!nombre.equals(correspondance)) {
-//			if (nombre.equals(correspondance))
-//		}
-		
-		if (nombre.length() < 2) {
-			if (intNombre < 5) {
-				for (int j= 0; j < intNombre; ++j) {
-					chiffreRomain += "I";
-				}
-			}else {
-				for (int j= 0; j < intNombre; ++j) {
-					chiffreRomain += "V";
-				}
-			}
-		}else if (nombre.length() < 3) {
 
-			if (intNombre < 50) {
-				char prefix = nombre.charAt(0);
-				int cpt2 = nombre.charAt(0);
-				intNombre = prefix;
-				System.out.println("   " + intNombre + "      " + nombre.charAt(0) + "  " + prefix);
-				chiffreRomain = " ";
-				for (int j= 0; j < nombre.charAt(0); ++j) {
-					System.out.print("=");
-					chiffreRomain += "X";
-				}
-			}else {
-				System.out.println(" ==>  " + nombre.charAt(0));
-				int cpt2 = Character.getNumericValue(nombre.charAt(0));
-				System.out.println(" cpt 2 ==>  " + cpt2);
-				while (cpt2 > 0) {
-					chiffreRomain += "L";
-					cpt2--;
-				}
+		intNombre = Integer.valueOf(nombre);
+
+		if (nombre.length() == 4) {
+			borneMax = Character.getNumericValue(nombre.charAt(0));
+			for (int j= 0; j < borneMax; ++j) {
+				chiffreRomain += "M";
 			}
-		}else if (nombre.length() < 4) {
-			if (intNombre < 500) {
-				for (int j= 0; j < intNombre; ++j) {
+			nombre = nombre.substring(1, nombre.length());
+			System.out.println("nombre : " + nombre);
+		} 
+
+		if (nombre.length() == 3) {
+			borneMax = Character.getNumericValue(nombre.charAt(0));
+			System.out.println("borneMax " + borneMax);
+			if (borneMax <= 3) {
+				for (int j= 0; j < borneMax; ++j) { 
 					chiffreRomain += "C";
 				}
+			}else if (borneMax == 4) {
+				chiffreRomain += "CD";
 			}else {
-				for (int j= 0; j < intNombre; ++j) {
+				System.out.println("borneMax 0: " + borneMax);
+				System.out.println("borneMax 1: " + borneMax);
+				if (borneMax == 9) {
+					chiffreRomain += "CM";
+				}else {
 					chiffreRomain += "D";
+					borneMax -= 5;
+					if (borneMax >= 1) {
+						for (int j= 0; j < borneMax; ++j) { 
+							chiffreRomain += "C";
+						}
+					}
 				}
-			}	
-		}else {
-			for (int j= 0; j < intNombre; ++j) {
-				chiffreRomain += "M";
+			}
+			nombre = nombre.substring(1, nombre.length());
+			System.out.println("nombre : " + nombre);
+		} 
+
+		if (nombre.length() == 2) {
+			borneMax = Character.getNumericValue(nombre.charAt(0));
+			System.out.println("borneMax " + borneMax);
+			if (borneMax <= 3) {
+				for (int j= 0; j < borneMax; ++j) { 
+					chiffreRomain += "X";
+				}
+			}else if (borneMax == 4) {
+				chiffreRomain += "XL";
+			}else {
+				System.out.println("borneMax 0: " + borneMax);
+				System.out.println("borneMax 1: " + borneMax);
+				if (borneMax == 9) {
+					chiffreRomain += "XC";
+				}else {
+					chiffreRomain += "L";
+					borneMax -= 5;
+					if (borneMax >= 1) {
+						for (int j= 0; j < borneMax; ++j) { 
+							chiffreRomain += "X";
+						}
+					}
+				}
+			}
+			nombre = nombre.substring(1, nombre.length());
+			System.out.println("nombre : " + nombre);
+			
+		}
+		
+		if (nombre.length() == 1) {
+			borneMax = Character.getNumericValue(nombre.charAt(0));
+			System.out.println("borneMax " + borneMax);
+			if (borneMax <= 3) {
+				for (int j= 0; j < borneMax; ++j) { 
+					chiffreRomain += "I";
+				}
+			}else if (borneMax == 4) {
+				chiffreRomain += "IV";
+			}else {
+				System.out.println("borneMax 0: " + borneMax);
+				System.out.println("borneMax 1: " + borneMax);
+				if (borneMax == 9) {
+					chiffreRomain += "IX";
+				}else {
+					chiffreRomain += "V";
+					borneMax -= 5;
+					if (borneMax >= 1) {
+						for (int j= 0; j < borneMax; ++j) { 
+							chiffreRomain += "I";
+						}
+					}
+				}
 			}
 		}
 		
 		System.out.println("Chiffre romain : " + chiffreRomain);
-		
+
 		myObj.close();
-		
-	} 
-
-
+	}
 }
+
+
+
 
 
